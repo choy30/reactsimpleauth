@@ -24,6 +24,8 @@ const AuthForm = () => {
 		const enteredEmail = emailInputRef.current.value;
 		const enteredPasword = passwordInputRef.current.value;
 
+		// optional: Add validation
+
 		setIsLoading(true);
 		let url;
 		if (isLogin) {
@@ -50,9 +52,9 @@ const AuthForm = () => {
 					return res.json();
 				} else {
 					return res.json().then((data) => {
-						let errorMessage = "Authentication failed";
+						let errorMessage = "Authentication failed!";
 						// if (data && data.error && data.error.message) {
-						// 	errorMessage = data.error.message;
+						//   errorMessage = data.error.message;
 						// }
 
 						throw new Error(errorMessage);
@@ -63,7 +65,7 @@ const AuthForm = () => {
 				const expirationTime = new Date(
 					new Date().getTime() + +data.expiresIn * 1000
 				);
-				authCtx.login(data.idToken, expirationTime.toISOString);
+				authCtx.login(data.idToken, expirationTime.toISOString());
 				history.replace("/");
 			})
 			.catch((err) => {
